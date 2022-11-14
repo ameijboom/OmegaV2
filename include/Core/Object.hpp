@@ -6,8 +6,9 @@
 
 #include "SFML/Graphics/Transformable.hpp"
 #include "SFML/Graphics/Drawable.hpp"
+#include "SFML/Graphics/Shape.hpp"
 
 namespace Core {
-    class Object : sf::Transformable, sf::Drawable {
+    class Object : sf::Shape {
     };
 }
