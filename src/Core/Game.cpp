@@ -8,7 +8,7 @@
 namespace Core {
     Game::Game(sf::RenderWindow *window) {
         this->window = window;
-        this->objects = std::vector<sf::Shape*>();
+        this->objects = std::vector<Core::Object*>();
     }
 
     void Game::run() const {
@@ -26,12 +26,12 @@ namespace Core {
     }
 
     void Game::render() const {
-        for (sf::Shape* shape : objects) {
-            window->draw(*shape);
+        for (auto object : objects) {
+            object->draw(window);
         }
     }
 
-    void Game::add(sf::Shape *shape) {
-        objects.push_back(shape);
+    void Game::add(Core::Object* object) {
+        objects.push_back(object);
     }
 }

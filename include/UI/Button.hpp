@@ -11,16 +11,17 @@
 #include "SFML/Graphics/RenderWindow.hpp"
 
 namespace UI {
-    class Button : public sf::RectangleShape {
+class Button : public Core::Object {
     private:
         sf::Color hoverColor;
         sf::Text& text;
+        sf::RectangleShape rect;
 
     private:
-        void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-        void setPosition(const sf::Vector2f& position);
+        void updateText();
 
     public:
         Button(sf::Vector2f size, sf::Vector2f position, sf::Color color, sf::Color hoverColor, sf::Text& text);
+        void draw(sf::RenderTarget* target) const override;
     };
 }

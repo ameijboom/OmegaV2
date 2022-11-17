@@ -5,22 +5,24 @@
 #include "SFML/Window/Mouse.hpp"
 
 namespace UI {
-    Button::Button(sf::Vector2f size, sf::Vector2f position, sf::Color color, sf::Color hoverColor, sf::Text& text) : sf::RectangleShape(size), text(text), hoverColor(hoverColor) {
-        setPosition(position);
-        setFillColor(color);
-        setOutlineColor(sf::Color::Black);
+    Button::Button(sf::Vector2f size, sf::Vector2f position, sf::Color color, sf::Color hoverColor, sf::Text& text) : rect(size), text(text), hoverColor(hoverColor) {
+        this->rect.setPosition(position);
+        this->rect.setFillColor(color);
+        this->rect.setOutlineColor(sf::Color::Black);
+
+        updateText();
     }
 
-    void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-        target.draw(static_cast<sf::RectangleShape>(*this), states);
-        target.draw(this->text, states);
+    void Button::draw(sf::RenderTarget* target) const {
+        target->draw(this->rect);
+        target->draw(this->text);
     }
 
-    void Button::setPosition(const sf::Vector2f& position) {
-        auto size = this->getSize();
+    void Button::updateText() {
+        auto size = this->rect.getSize();
+        auto position = this->rect.getPosition();
 
-        this->text.setPosition(sf::Vector2f(position.x + size.x / 2.0f, position.y + size.y / 2.0f));
         this->text.setOrigin(sf::Vector2f(this->text.getLocalBounds().width / 2.0f, this->text.getLocalBounds().height));
-        sf::RectangleShape::setPosition(position);
-    };
+        this->text.setPosition(sf::Vector2f(position.x + size.x / 2.0f, position.y + size.y / 2.0f));
+    }
 }

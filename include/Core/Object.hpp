@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include "SFML/Graphics/Transformable.hpp"
 #include "SFML/Graphics/Drawable.hpp"
-#include "SFML/Graphics/Shape.hpp"
 
 namespace Core {
-    class Object : sf::Shape {
+    class Object {
+    public:
+        virtual void draw(sf::RenderTarget* target) const {}
     };
 }

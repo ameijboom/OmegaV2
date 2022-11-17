@@ -11,7 +11,7 @@ namespace Core {
     class Game {
     private:
         sf::RenderWindow *window;
-        std::vector<sf::Shape*> objects;
+        std::vector<Core::Object*> objects;
 
     private:
         void render() const;
@@ -19,6 +19,6 @@ namespace Core {
     public:
         explicit Game(sf::RenderWindow *window);
         void run() const;
-        void add(sf::Shape *shape);
+        void add(Core::Object *object);
     };
 }
