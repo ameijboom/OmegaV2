@@ -5,10 +5,12 @@
 #include "SFML/Window/Mouse.hpp"
 
 namespace UI {
-    Button::Button(sf::Vector2f size, sf::Vector2f position, sf::Color color, sf::Color hoverColor, sf::Text& text) : rect(size), text(text), hoverColor(hoverColor) {
+    Button::Button(sf::Vector2f size, sf::Vector2f position, sf::Color color, sf::Text& text, void(*click)(Core::Event)) : rect(size), text(text) {
         this->rect.setPosition(position);
         this->rect.setFillColor(color);
         this->rect.setOutlineColor(sf::Color::Black);
+
+        this->click = click;
 
         updateText();
     }
@@ -22,8 +24,8 @@ namespace UI {
         return this->rect.getGlobalBounds();
     }
 
-    void Button::onClick() {
-        this->rect.setFillColor(this->hoverColor);
+    void Button::onClick(Core::Event event) {
+        this->click(event);
     }
 
     void Button::updateText() {

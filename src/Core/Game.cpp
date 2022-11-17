@@ -14,7 +14,7 @@ namespace Core {
     void Game::handleOnClick(const sf::Vector2f mousePos) const {
         for (auto* object : objects) {
             if (object->getBounds().contains(mousePos)) {
-                object->onClick();
+                object->onClick(Core::Event(window));
             }
         }
     }

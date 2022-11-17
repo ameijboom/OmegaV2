@@ -10,7 +10,7 @@ FetchContent_Declare(SFML
         GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(Omega2 src/main.cpp src/Core/Game.cpp src/UI/Button.cpp)
+add_executable(Omega2 src/main.cpp src/Core/Game.cpp src/UI/Button.cpp src/Core/Event.cpp)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
