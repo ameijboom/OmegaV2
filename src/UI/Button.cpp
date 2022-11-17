@@ -18,6 +18,14 @@ namespace UI {
         target->draw(this->text);
     }
 
+    sf::FloatRect Button::getBounds() const {
+        return this->rect.getGlobalBounds();
+    }
+
+    void Button::onClick() {
+        this->rect.setFillColor(this->hoverColor);
+    }
+
     void Button::updateText() {
         auto size = this->rect.getSize();
         auto position = this->rect.getPosition();

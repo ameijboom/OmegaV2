@@ -23,5 +23,7 @@ class Button : public Core::Object {
     public:
         Button(sf::Vector2f size, sf::Vector2f position, sf::Color color, sf::Color hoverColor, sf::Text& text);
         void draw(sf::RenderTarget* target) const override;
+        sf::FloatRect getBounds() const override;
+        void onClick() override;
     };
 }

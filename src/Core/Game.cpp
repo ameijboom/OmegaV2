@@ -11,12 +11,28 @@ namespace Core {
         this->objects = std::vector<Core::Object*>();
     }
 
+    void Game::handleOnClick(const sf::Vector2f mousePos) const {
+        for (auto* object : objects) {
+            if (object->getBounds().contains(mousePos)) {
+                object->onClick();
+            }
+        }
+    }
+
     void Game::run() const {
         while(window->isOpen()) {
             sf::Event event;
 
             while(window->pollEvent(event)) {
-                if (event.type == sf::Event::Closed) window->close();
+                switch(event.type) {
+                    case sf::Event::EventType::Closed:
+                        window->close();
+                        break;
+                    case sf::Event::MouseButtonReleased:
+                        if (event.mouseButton.button != sf::Mouse::Button::Left) break;
+                        handleOnClick(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+                        break;
+                }
             }
 
             window->clear();

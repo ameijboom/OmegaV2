@@ -15,6 +15,7 @@ namespace Core {
 
     private:
         void render() const;
+        void handleOnClick(const sf::Vector2f mousePos) const;
 
     public:
         explicit Game(sf::RenderWindow *window);

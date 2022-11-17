@@ -10,5 +10,7 @@ namespace Core {
     class Object {
     public:
         virtual void draw(sf::RenderTarget* target) const {}
+        virtual void onClick() {}
+        virtual sf::FloatRect getBounds() const {}
     };
 }
