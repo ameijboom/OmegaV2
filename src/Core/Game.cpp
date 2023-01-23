@@ -8,20 +8,17 @@
 namespace Core {
     Game::Game(sf::RenderWindow *window) {
         this->window = window;
-        this->objects = std::vector<Core::Object*>();
+        this->scenes = std::vector<Core::Scene*>();
+        this->activeScene = nullptr;
     }
 
     void Game::handleOnClick(const sf::Vector2f mousePos) const {
-        for (auto* object : objects) {
-            if (object->getBounds().contains(mousePos)) {
-                object->onClick(Core::Event(window));
-            }
-        }
+        activeScene->onClick(mousePos);
     }
 
     void Game::run() const {
         while(window->isOpen()) {
-            sf::Event event;
+            sf::Event event{};
 
             while(window->pollEvent(event)) {
                 switch(event.type) {
@@ -41,13 +38,28 @@ namespace Core {
         }
     }
 
-    void Game::render() const {
-        for (auto object : objects) {
-            object->draw(window);
+    void Game::activate(std::string id) {
+        for (auto* scene : scenes) {
+            if (scene->id == id) {
+                scene->insertWindow(window);
+                activeScene = scene;
+            }
         }
     }
 
-    void Game::add(Core::Object* object) {
-        objects.push_back(object);
+    void Game::render() const {
+        if (activeScene != nullptr) {
+            activeScene->render();
+        }
+    }
+
+    void Game::addScene(Core::Scene* scene) {
+        scenes.push_back(scene);
+    }
+
+    void Game::addScenes(std::vector<Core::Scene *> scenes) {
+        for (auto* scene : scenes) {
+            Game::addScene(scene);
+        }
     }
 }

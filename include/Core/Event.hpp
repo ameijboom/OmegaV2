@@ -5,13 +5,17 @@
 #pragma once
 
 #include "SFML/Window.hpp"
+namespace Core {
+    class Game;
+}
 
 namespace Core {
     class Event {
     public:
         sf::Window* window;
+        Core::Game* game;
 
     public:
-        Event(sf::Window* window);
+        Event(sf::Window* window, Core::Game* game);
     };
 }

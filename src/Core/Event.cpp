@@ -4,5 +4,5 @@
 #include "Event.hpp"
 
 namespace Core {
-    Event::Event(sf::Window* window) : window(window) {}
+    Event::Event(sf::Window* window, Core::Game* game) : window(window), game(game) {}
 }
