@@ -10,6 +10,9 @@ FetchContent_Declare(SFML
         GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
+FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
+FetchContent_MakeAvailable(json)
+
 add_executable(omega src/main.cpp src/Core/Game.cpp src/UI/Button.cpp src/Core/Event.cpp src/Core/Scene.cpp)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
@@ -17,7 +20,7 @@ file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 target_include_directories(omega PRIVATE "include")
 target_include_directories(omega PRIVATE "include/Core")
 target_include_directories(omega PRIVATE "assets")
-target_link_libraries(omega PRIVATE sfml-graphics sfml-window sfml-audio)
+target_link_libraries(omega PRIVATE sfml-graphics sfml-window sfml-audio nlohmann_json::nlohmann_json)
 
 if (WIN32 AND BUILD_SHARED_LIBS)
     add_custom_command(TARGET omega POST_BUILD
