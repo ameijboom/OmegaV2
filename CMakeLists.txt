@@ -13,7 +13,7 @@ FetchContent_MakeAvailable(SFML)
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz)
 FetchContent_MakeAvailable(json)
 
-add_executable(omega src/main.cpp src/Core/Game.cpp src/UI/Button.cpp src/Core/Event.cpp src/Core/Scene.cpp)
+add_executable(omega src/main.cpp src/Core/Game.cpp src/UI/Button.cpp src/Core/Event.cpp src/Core/Scene.cpp src/Core/Battle.cpp src/Entities/Entity.cpp src/UI/Textbox.cpp)
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 

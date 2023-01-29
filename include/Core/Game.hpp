@@ -15,6 +15,7 @@ namespace Core {
         std::vector<Core::Scene*> scenes;
         Core::Scene *activeScene;
 
+
     private:
         void render() const;
         void handleOnClick(sf::Vector2f mousePos) const;
