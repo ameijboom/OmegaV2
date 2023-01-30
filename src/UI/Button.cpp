@@ -9,6 +9,7 @@ namespace UI {
         this->rect.setPosition(position);
         this->rect.setFillColor(color);
         this->rect.setOutlineColor(sf::Color::Black);
+        this->rect.setOutlineThickness(2.0f);
 
         this->click = click;
 
@@ -32,7 +33,7 @@ namespace UI {
         auto size = this->rect.getSize();
         auto position = this->rect.getPosition();
 
-        this->text.setOrigin(sf::Vector2f(this->text.getLocalBounds().width / 2.0f, this->text.getLocalBounds().height));
+        this->text.setOrigin(sf::Vector2f(this->text.getLocalBounds().width / 2.0f, this->text.getLocalBounds().height / 2.0f));
         this->text.setPosition(sf::Vector2f(position.x + size.x / 2.0f, position.y + size.y / 2.0f));
     }
 }

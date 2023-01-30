@@ -12,6 +12,6 @@ namespace Core {
     public:
         virtual void draw(sf::RenderTarget* target) const {}
         virtual void onClick(Core::Event event) {}
-        virtual sf::FloatRect getBounds() const {}
+        [[nodiscard]] virtual sf::FloatRect getBounds() const { return {}; }
     };
 }

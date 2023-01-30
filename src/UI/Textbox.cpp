@@ -2,6 +2,7 @@
 // Created by alwin on 29/01/23.
 //
 
+#include <iostream>
 #include "UI/Textbox.hpp"
 
 class RenderTarget;
@@ -29,5 +30,10 @@ namespace UI {
         auto position = sf::Vector2f(this->rect.getPosition().x + size.x / 2.0f, this->rect.getPosition().y + size.y / 2.0f);
 
         this->text.setPosition(sf::Vector2f(position.x - size.x / 2.0f + 2.0f, position.y - size.y / 2.0f + 2.0f));
+    }
+
+    void Textbox::notify(const std::string& message) {
+        this->text.setString(message);
+        std::cout << message << std::endl;
     }
 }

@@ -8,7 +8,7 @@
 #include <utility>
 
 namespace Core {
-    Scene::Scene(Core::Game* game, std::string id) : id(std::move(id)), game(game) {
+    Scene::Scene(Core::Game* game, std::string id, bool battle) : id(std::move(id)), game(game), battle(battle) {
         this->objects = std::vector<Core::Object*>();
         this->window = nullptr;
     }
@@ -39,5 +39,9 @@ namespace Core {
         for (auto* object : object_vec) {
             Scene::addObject(object);
         }
+    }
+
+    void Scene::addText(sf::Text *text) {
+        title = text;
     }
 }

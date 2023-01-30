@@ -22,5 +22,6 @@ class Textbox : public Core::Object {
         Textbox(sf::Vector2f size, sf::Vector2f position, sf::Text& text);
         void draw(sf::RenderTarget* target) const override;
         sf::FloatRect getBounds() const override;
+        void notify(const std::string& message);
     };
 }

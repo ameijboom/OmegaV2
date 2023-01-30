@@ -1,12 +1,15 @@
 //
 // Created by alwin on 11/14/22.
 //
+#include <thread>
+#include <iostream>
 #include "Game.hpp"
 #include "UI/Button.hpp"
 #include "SFML/Window/Event.hpp"
 
+
 namespace Core {
-    Game::Game(sf::RenderWindow *window) {
+    Game::Game(sf::RenderWindow *window, Core::Battle* battle) : battle(battle){
         this->window = window;
         this->scenes = std::vector<Core::Scene*>();
         this->activeScene = nullptr;
@@ -16,8 +19,12 @@ namespace Core {
         activeScene->onClick(mousePos);
     }
 
-    void Game::run() const {
+    void Game::run() {
         while(window->isOpen()) {
+            if (battle->wait) {
+                std::this_thread::sleep_for(std::chrono::seconds (1));
+                battle->wait = false;
+            }
             sf::Event event{};
 
             while(window->pollEvent(event)) {
@@ -34,6 +41,13 @@ namespace Core {
 
             window->clear();
             render();
+            if (activeScene->battle) {
+                battle->EnemyTurn();
+                if(battle->player->hp <= 0) {
+                    Game::activate("Game Over");
+                    std::cout << "Should Switch" << std::endl;
+                }
+            }
             window->display();
         }
     }
@@ -50,6 +64,9 @@ namespace Core {
     void Game::render() const {
         if (activeScene != nullptr) {
             activeScene->render();
+            if (activeScene->battle) {
+                battle->draw(window);
+            }
         }
     }
 
