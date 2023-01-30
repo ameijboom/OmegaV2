@@ -34,6 +34,8 @@ void attack(Core::Event event) {
 
         if(target != nullptr) event.game->battle->attack(user, target);
         event.game->battle->turn = Core::Turn::Enemy;
+
+        if(target == nullptr) event.game->activate("Menu");
     }
 }
 
@@ -68,7 +70,7 @@ void writeScores(const std::vector<int>& scores) {
 
 void eraseScores(Core::Event event) {
     event.game->scores = {};
-    writeScores({});
+    writeScores({0});
 }
 
 int main() {
@@ -146,10 +148,11 @@ int main() {
     game.scores = &scores;
 
     for (int i = 0; i < 5; i++) {
-        highScores.emplace_back(std::to_string(scores[i]), sf::Vector2f(1280/2-50, 756/2-100+i*10), "assets/retganon.ttf");
+        highScores.emplace_back(std::to_string(scores[i]), sf::Vector2f(1280/2-50, 756/2-100-i*10), "assets/RulerGold.ttf");
     }
 
-    for (auto &score : highScores) {
+    for (auto score : highScores) {
+//        score.UpdateText("Test");
         highScoreDisplay.addText(&score);
     }
 
@@ -168,6 +171,8 @@ int main() {
     menu.addObject(&HighScoreButton);
     gameOver.addObject(&HighScoreButton);
     highScoreScene.addObject(&highScoreDisplay);
+    highScoreScene.addObject(&HighScoreErasureButton);
+    highScoreScene.addObject(&menuButton);
     std::vector<Core::Scene*> scenes;
 
     scenes.push_back(&menu);
